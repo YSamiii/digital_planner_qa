@@ -5,7 +5,7 @@
   const type=value=>Array.isArray(value)?'array':value===null?'null':typeof value;
   const count=value=>Array.isArray(value)?value.length:value&&typeof value==='object'?Object.keys(value).length:0;
   const objectId=value=>value&&typeof value==='object'&&value.id!=null?String(value.id):'';
-  const diagnosticKey=key=>/^journal-planner-(?:inventory-edit-trace|orders-save-trace|orders-persistence-trace|project30-checkbox-trace|project30-interaction-trace|dashboard-runtime-trace|today-active-challenge-trace|today-hide-when-empty-trace|snapshot-verification)-/i.test(key);
+  const diagnosticKey=key=>/^journal-planner-qa-(?:inventory-edit-trace|orders-save-trace|orders-persistence-trace|project30-checkbox-trace|project30-interaction-trace|dashboard-runtime-trace|today-active-challenge-trace|today-hide-when-empty-trace|snapshot-verification)-/i.test(key);
   function strings(value,path='$',out=[],depth=0){
     if(depth>10)return out;
     if(typeof value==='string'){const bytes=utf8(value);if(bytes>51200||/^data:/i.test(value)||(/^[A-Za-z0-9+/=\s]+$/.test(value)&&bytes>4096))out.push({path,bytes,category:/^data:image/i.test(value)?'data_image':/^data:/i.test(value)?'data_url':'base64_like'});return out;}
@@ -23,7 +23,7 @@
     return out;
   }
   function localStorageKeys(storage){
-    const rows=[];try{for(let index=0;index<storage.length;index++){const key=storage.key(index)||'',value=storage.getItem(key)||'';rows.push({key,bytes:utf8(value),utf16Bytes:utf16(value),characters:value.length,purpose:key==='journal-planner-v091'?'canonical':diagnosticKey(key)?'diagnostic':'other'});}}catch(error){return {error:{name:error?.name||'Error',message:error?.message||String(error)},rows:[],totalBytes:0};}
+    const rows=[];try{for(let index=0;index<storage.length;index++){const key=storage.key(index)||'',value=storage.getItem(key)||'';rows.push({key,bytes:utf8(value),utf16Bytes:utf16(value),characters:value.length,purpose:key==='journal-planner-qa-v091'?'canonical':diagnosticKey(key)?'diagnostic':'other'});}}catch(error){return {error:{name:error?.name||'Error',message:error?.message||String(error)},rows:[],totalBytes:0};}
     rows.sort((a,b)=>b.bytes-a.bytes);return {rows,totalBytes:rows.reduce((sum,row)=>sum+row.bytes,0),diagnosticBytes:rows.filter(row=>row.purpose==='diagnostic').reduce((sum,row)=>sum+row.bytes,0)};
   }
   function moduleRows(state){return Object.entries(state||{}).map(([key,value])=>({module:key,bytes:utf8(value),utf16Bytes:utf16(value),count:count(value),type:type(value)})).sort((a,b)=>b.bytes-a.bytes);}

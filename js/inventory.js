@@ -98,7 +98,7 @@
       diag.record('media preservation check',{itemId:editId,oldImageRef,newImageRef,result:updated?.imageRef===newImageRef});
       if(pendingImageFile)try{await media.putBlob(pendingImageFile,{id:newImageRef,ownerType:'inventory',ownerId:editId});}catch(error){diag.record('completion/error',{itemId:editId,error:String(error?.message||error),phase:'media finalize'});}
       if(category&&!PRESET_CATEGORIES.includes(category)&&!inv().categories.includes(category))inv().categories.push(category);if(location&&!PRESET_LOCATIONS.includes(location)&&!inv().locations.includes(location))inv().locations.push(location);
-      diag.record('persistence write start',{itemId:editId,persistenceKey:'journal-planner-v091'});const persisted=save();diag.record('persistence write end',{itemId:editId,result:persisted?.ok?'success':'failed'});
+      diag.record('persistence write start',{itemId:editId,persistenceKey:'journal-planner-qa-v091'});const persisted=save();diag.record('persistence write end',{itemId:editId,result:persisted?.ok?'success':'failed'});
       if(!persisted?.ok){diag.record('completion/error',{itemId:editId,phase:'persistence',error:persisted?.message||'保存失败；编辑窗口保持打开。'});return persisted;}
       const readBack=diag.readPersistedItem(editId),fields=['name','quantity','location','notes','category','unit','minQuantity','expiryDate'],mismatch=fields.filter(field=>String(readBack?.[field]??'')!==String(updated?.[field]??''));
       diag.record('persistence comparison',{itemId:editId,requestedUpdate:update,persistedRecord:diag.itemSnapshot(readBack),result:mismatch.length?'mismatch':'match',mismatchedFields:mismatch});

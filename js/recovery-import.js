@@ -37,7 +37,7 @@
   function validatePackage(pkg){
     const errors=[];
     if(!pkg||typeof pkg!=='object'||Array.isArray(pkg))errors.push('恢复包不是 JSON 对象。');
-    if(pkg?.packageFormat!=='personal-life-hub-recovery-all-data')errors.push('不是受支持的单包恢复格式。');
+    if(pkg?.packageFormat!=='personal-life-hub-qa-recovery-all-data')errors.push('不是受支持的单包恢复格式。');
     if(Number(pkg?.schemaVersion)!==12)errors.push('恢复包 schemaVersion 必须为 12。');
     const modules=pkg?.modules;
     for(const name of ['daily','legacyJournal','ordersBatches','inventory','subscriptions','noSpend','challenges'])if(!modules||!modules[name])errors.push(`恢复包缺少 ${name} 模块。`);

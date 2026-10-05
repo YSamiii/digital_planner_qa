@@ -25,7 +25,7 @@
     const removed=cleanupKeys(result);
     return removed.every(item=>{
       const candidate=String(item||'');
-      return candidate!==String(key) && (safeKey?.(candidate)===true || /^journal-planner-transient-/.test(candidate));
+      return candidate!==String(key) && (safeKey?.(candidate)===true || /^journal-planner-qa-transient-/.test(candidate));
     });
   }
   function runCompactRetry(context){

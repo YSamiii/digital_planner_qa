@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const DB_NAME='personal-life-hub', DB_VERSION=3, MEDIA_STORE='media', SNAPSHOT_STORE='snapshots', LEGACY_JOURNAL_PAYLOAD_STORE='legacyJournalPayloads';
+  const DB_NAME='personal-life-hub-qa', DB_VERSION=3, MEDIA_STORE='media', SNAPSHOT_STORE='snapshots', LEGACY_JOURNAL_PAYLOAD_STORE='legacyJournalPayloads';
   let dbPromise;
   function open(){if(dbPromise)return dbPromise;dbPromise=new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains(MEDIA_STORE))db.createObjectStore(MEDIA_STORE,{keyPath:'id'});if(!db.objectStoreNames.contains(SNAPSHOT_STORE))db.createObjectStore(SNAPSHOT_STORE,{keyPath:'snapshotId'});if(!db.objectStoreNames.contains(LEGACY_JOURNAL_PAYLOAD_STORE))db.createObjectStore(LEGACY_JOURNAL_PAYLOAD_STORE,{keyPath:'id'});};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});return dbPromise;}
   async function run(storeName,mode,fn){const db=await open();return new Promise((resolve,reject)=>{const tx=db.transaction(storeName,mode),store=tx.objectStore(storeName);let result;try{result=fn(store)}catch(error){reject(error);return}tx.oncomplete=()=>resolve(result?.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});}

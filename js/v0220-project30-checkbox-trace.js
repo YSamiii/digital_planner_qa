@@ -3,7 +3,7 @@
   const build='0.22.0-daily-question-device-mapping-diagnostic-r2-final-qa';
   window.JOURNAL_BUILD=build;
   document.documentElement.dataset.runtimeBuild=build;
-  const key='journal-planner-project30-checkbox-trace-v0220';
+  const key='journal-planner-qa-project30-checkbox-trace-v0220';
   function count(){try{return (JSON.parse(localStorage.getItem(key)||'{"events":[]}').events||[]).length;}catch(_){return 0;}}
   function render(){const node=document.querySelector('#project30CheckboxTraceCount');if(node)node.textContent=`Project 30 checkbox trace: ${count()} events`;}
   function install(){

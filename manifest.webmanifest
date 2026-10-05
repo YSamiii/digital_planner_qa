@@ -1,0 +1,16 @@
+{
+  "name": "电子手帐 QA",
+  "short_name": "手帐 QA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FAF5EE",
+  "theme_color": "#FAF5EE",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,2242 @@
+{
+  "source": "ScreenRecording_08-28-2026 09-55-05_1(1).mp4",
+  "sourceType": "legacy_daily_question_settings_screen_recording",
+  "durationSeconds": 92.1,
+  "coverage": {
+    "expectedDateSlots": 366,
+    "dateSlotsObserved": 366,
+    "verifiedFullText": 364,
+    "needsManualReview": 2,
+    "missingMMDD": [],
+    "duplicateMMDD": [],
+    "leapDayObserved": true
+  },
+  "transcriptionNotes": [
+    "日期由旧 App「每日一问设置」列表直接显示，不按列表位置猜测。",
+    "问题文字以录屏可见内容人工逐帧核对；标点/空格仅做轻微规范化。",
+    "10-15 与 12-06 在原始 UI 中被省略号截断，因此不猜测尾句。"
+  ],
+  "anchorValidation": {
+    "08-25": {
+      "recording": "最近一次因为学习而感到兴奋是什么时候？",
+      "iphoneHistorical": "最近一次因为学习而感到兴奋是什么时候?",
+      "result": "content_exact_punctuation_normalized"
+    },
+    "08-26": {
+      "recording": "最近一个周末想做什么？",
+      "iphoneHistorical": "最近一个周末想做什么?",
+      "result": "content_exact_punctuation_normalized"
+    },
+    "08-27": {
+      "recording": "今天写完日记之后做什么？",
+      "iphoneHistorical": "今天写完日记之后做什么?",
+      "result": "content_exact_punctuation_normalized"
+    },
+    "08-28": {
+      "recording": "最近随身携带的东西是什么？",
+      "iphoneHistorical": "我现在最期待的事情是什么？",
+      "historicalQuestionId": "system-new-year",
+      "result": "mismatch_confirmed"
+    }
+  },
+  "questions": [
+    {
+      "mmdd": "01-01",
+      "sourceText": "我的新年愿望是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-02",
+      "sourceText": "今年想完成的目标有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-03",
+      "sourceText": "今年想对自己说什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-04",
+      "sourceText": "今年的 to-do 和 not-to-do。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-05",
+      "sourceText": "在接下来的五年里,我希望实现什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-06",
+      "sourceText": "今年想学会什么技能？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-07",
+      "sourceText": "现在的烦恼是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-08",
+      "sourceText": "最近一件让我快乐的事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-09",
+      "sourceText": "今年最想去哪里旅行？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-10",
+      "sourceText": "今年最期待收到什么好消息？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-11",
+      "sourceText": "今年想成为什么样的人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-12",
+      "sourceText": "今年最想养成什么习惯？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-13",
+      "sourceText": "有什么事是计划很久一直没有行动的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-14",
+      "sourceText": "写下自己 10 个优点。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-15",
+      "sourceText": "今年的存钱计划是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-16",
+      "sourceText": "去年有什么遗憾的事?今年可以弥补吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-17",
+      "sourceText": "记录现在的婚恋观。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-18",
+      "sourceText": "我喜欢自己现在的状态吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-19",
+      "sourceText": "最近感兴趣的新事物是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-20",
+      "sourceText": "今年最想买的大件是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-21",
+      "sourceText": "最近喜欢什么颜色？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-22",
+      "sourceText": "记录现在的生育观。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-23",
+      "sourceText": "现阶段我与父母之间的矛盾或冲突是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-24",
+      "sourceText": "现在的我如何与自己相处？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-25",
+      "sourceText": "回忆一件我的童年趣事。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-26",
+      "sourceText": "描述我眼中的自由。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-27",
+      "sourceText": "我会给更年轻的自己什么建议？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-28",
+      "sourceText": "描述我梦想中的房间。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-29",
+      "sourceText": "如果我打算写一本书,会写什么主题？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-30",
+      "sourceText": "现在的发型是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "01-31",
+      "sourceText": "最近从别人身上学到的一件事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-01",
+      "sourceText": "描述此刻听到的声音。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-02",
+      "sourceText": "回到过去,我希望让什么改变？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-03",
+      "sourceText": "最无法容忍他人的一个缺点是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-04",
+      "sourceText": "最近对自己有哪些新发现？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-05",
+      "sourceText": "有什么我希望能早点知道的事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-06",
+      "sourceText": "现在的我能做哪些一年前做不到的事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-07",
+      "sourceText": "最近获得了哪些灵感？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-08",
+      "sourceText": "闭上眼睛,现在我的脑海中浮现了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-09",
+      "sourceText": "最近想收到什么礼物？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-10",
+      "sourceText": "最近最优先的三项事项是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-11",
+      "sourceText": "我觉得苦难有意义吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-12",
+      "sourceText": "对现在的我来说,最理想的年纪是几岁？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-13",
+      "sourceText": "很庆幸父母教会我的事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-14",
+      "sourceText": "描述我珍惜的某件物品。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-15",
+      "sourceText": "觉得累的时候想做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-16",
+      "sourceText": "今年的生日是怎么过的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-17",
+      "sourceText": "现在的年纪,我认为最好的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-18",
+      "sourceText": "最近有什么想对父母说的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-19",
+      "sourceText": "关于未来,我现在最担忧什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-20",
+      "sourceText": "今天穿的什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-21",
+      "sourceText": "我小时候是什么样的孩子？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-22",
+      "sourceText": "我现在最想知道答案的问题,明年来回答。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-23",
+      "sourceText": "目前我有什么一直坚持的三项原则？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-24",
+      "sourceText": "最近感到惊喜的时刻是？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-25",
+      "sourceText": "自己最近有什么新的优点和进步吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-26",
+      "sourceText": "最近入睡前我常常会想什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-27",
+      "sourceText": "描述一个感受到自己的存在或身体感觉的时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-28",
+      "sourceText": "此时此刻我最想去哪里?离我有多远？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "02-29",
+      "sourceText": "对现在的我来说生命的意义是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-01",
+      "sourceText": "最近从生活中学到什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-02",
+      "sourceText": "我觉得我现在的心理年龄是多少岁?为什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-03",
+      "sourceText": "现在的我觉得当我 80 岁时什么对我最重要？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-04",
+      "sourceText": "最近喜欢听什么歌？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-05",
+      "sourceText": "最近有什么想买的东西?列出购物清单。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-06",
+      "sourceText": "我最恐惧的事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-07",
+      "sourceText": "我最看重朋友什么品质？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-08",
+      "sourceText": "上次为自己感到骄傲的时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-09",
+      "sourceText": "有什么特别的东西是我旅行必带的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-10",
+      "sourceText": "如果人不用睡觉,我会怎么度过多出来的时间？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-11",
+      "sourceText": "描述一个让我感受到时间流逝的时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-12",
+      "sourceText": "现在我拥有什么东西是我小时候梦想的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-13",
+      "sourceText": "现在的我不愿意对什么妥协或投降？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-14",
+      "sourceText": "不考虑其他,现在创业做老板的话想做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-15",
+      "sourceText": "最近听到的八卦是？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-16",
+      "sourceText": "做什么可以增加我对生活的热情？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-17",
+      "sourceText": "最近听到的坏消息是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-18",
+      "sourceText": "除了自己以外,现在最信任的人是谁？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-19",
+      "sourceText": "最近弄丢了什么东西吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-20",
+      "sourceText": "最近做了什么自己觉得正确的决定？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-21",
+      "sourceText": "最近最好笑的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-22",
+      "sourceText": "最近一件庆幸自己做的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-23",
+      "sourceText": "最近认识了什么新朋友？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-24",
+      "sourceText": "今天和谁一起吃的饭?吃的什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-25",
+      "sourceText": "最近一次去医院是什么时候?为什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-26",
+      "sourceText": "写下最近一件从错误中学到的教训。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-27",
+      "sourceText": "最近是什么\"人设\"？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-28",
+      "sourceText": "最近吃到了什么新菜？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-29",
+      "sourceText": "现在常用的东西里什么买的最久？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-30",
+      "sourceText": "最近一次大哭是什么时候?为什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "03-31",
+      "sourceText": "希望下个季度的我有什么改变？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-01",
+      "sourceText": "今天是什么气温?天气怎么样?我有什么感受？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-02",
+      "sourceText": "最近有什么没做完的事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-03",
+      "sourceText": "在哪一刻感受到了自己的成长？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-04",
+      "sourceText": "现阶段反复思考着的问题是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-05",
+      "sourceText": "最近最喜欢的衣服。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-06",
+      "sourceText": "最近最关注的一件事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-07",
+      "sourceText": "最喜欢小时候的自己什么？现在的自己保留了这个特质吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-08",
+      "sourceText": "最近学到什么让我印象深刻的新知识或概念？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-09",
+      "sourceText": "会把自己比作什么动物？为什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-10",
+      "sourceText": "今年到目前,遇到了什么挑战？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-11",
+      "sourceText": "最近喜欢的 badending 的小说或影视是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-12",
+      "sourceText": "如果命运有具体形态,我希望我的命运是什么样子？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-13",
+      "sourceText": "最近的生活重心在哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-14",
+      "sourceText": "今年最想断舍离的东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-15",
+      "sourceText": "最近对什么事\"上头\"？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-16",
+      "sourceText": "最近最美好的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-17",
+      "sourceText": "记录一件和父母之间的事情。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-18",
+      "sourceText": "如果近期的生活是一部小说,我想起什么标题？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-19",
+      "sourceText": "今天有什么头条新闻？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-20",
+      "sourceText": "翻开手边任意一本书,写下第一个完整的句子。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-21",
+      "sourceText": "近期坚持得比较好的事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-22",
+      "sourceText": "最近看的一本书是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-23",
+      "sourceText": "最近一次心动是什么时候？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-24",
+      "sourceText": "列举一项我生活中重要的小事。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-25",
+      "sourceText": "如果我有尾巴,它会是什么样的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-26",
+      "sourceText": "最近 (为) 身边人做了什么事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-27",
+      "sourceText": "不考虑外在因素,现在我想做什么工作？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-28",
+      "sourceText": "最近一次喝酒是什么时候？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-29",
+      "sourceText": "最近喜欢吃什么零食？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "04-30",
+      "sourceText": "只考虑兴趣,我还想学什么专业？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-01",
+      "sourceText": "最近有什么堵在心里的事情？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-02",
+      "sourceText": "如果时间具像化,应该是什么模样？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-03",
+      "sourceText": "描述今晚的夜空。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-04",
+      "sourceText": "我近期最想定居在哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-05",
+      "sourceText": "最近想染什么颜色的头发?打算去染吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-06",
+      "sourceText": "最近吃到的好吃的有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-07",
+      "sourceText": "描述最近一段亲密关系。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-08",
+      "sourceText": "最近更想生活在城市还是大自然里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-09",
+      "sourceText": "目前的厨艺如何?拿手菜是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-10",
+      "sourceText": "最喜欢哪一个季节？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-11",
+      "sourceText": "此时此刻的窗外有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-12",
+      "sourceText": "现在是几点?最近都是这个时间段写日记吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-13",
+      "sourceText": "现在的我认为怎么做才是爱自己？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-14",
+      "sourceText": "最近有什么重复的错误？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-15",
+      "sourceText": "上一件买给别人的东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-16",
+      "sourceText": "写下喜欢今天的一个理由。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-17",
+      "sourceText": "我现在想要什么?愿意拿什么交换？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-18",
+      "sourceText": "我正在用什么标准衡量我自己的价值？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-19",
+      "sourceText": "当下的我认为如何让未来的我更幸福。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-20",
+      "sourceText": "最近有什么省钱小技巧？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-21",
+      "sourceText": "最近看过的最不喜欢的电影是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-22",
+      "sourceText": "最近一次情绪波动是因为什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-23",
+      "sourceText": "描述最近享受的生活片段。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-24",
+      "sourceText": "最近遇见的人里面哪一个最令我意外？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-25",
+      "sourceText": "描述现阶段的自己最不想成为的一种人。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-26",
+      "sourceText": "当下对我来说最重要的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-27",
+      "sourceText": "此时此刻我的情绪如何？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-28",
+      "sourceText": "我希望我的退休生活是什么样子？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-29",
+      "sourceText": "最近的目标体重是多少?健康状况如何？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-30",
+      "sourceText": "最近对什么事情失去兴趣了？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "05-31",
+      "sourceText": "我觉得目前该怎么做能让自己更健康？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-01",
+      "sourceText": "描述一个我认为自由的场景。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-02",
+      "sourceText": "最近让自己最印象深刻的话是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-03",
+      "sourceText": "最近身边最新喜欢的一样东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-04",
+      "sourceText": "近期的状态如何 (学习/工作)?",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-05",
+      "sourceText": "最近睡眠情况如何？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-06",
+      "sourceText": "最近什么能够激励我把事情做好？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-07",
+      "sourceText": "现阶段的我愿意为了什么义无反顾地付出？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-08",
+      "sourceText": "最近有什么我觉得在生活中忽略的事情？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-09",
+      "sourceText": "最近有清理掉什么不需要的人际关系吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-10",
+      "sourceText": "描述一个最近给我留下印象的陌生路人。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-11",
+      "sourceText": "我希望五年前的自己能多花一些时间做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-12",
+      "sourceText": "我用什么借口合理化当前的妥协？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-13",
+      "sourceText": "最近一次在路上遇见小动物是什么时候？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-14",
+      "sourceText": "有什么想为家人做的事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-15",
+      "sourceText": "最近让我感到挫败的一件事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-16",
+      "sourceText": "最近平均每天使用手机的时间有多久?哪个软件最多？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-17",
+      "sourceText": "现在的桌子上有些什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-18",
+      "sourceText": "最近联系最频繁的人是谁？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-19",
+      "sourceText": "最近有什么特别的经历？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-20",
+      "sourceText": "此时此刻我最想要什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-21",
+      "sourceText": "我希望明天和今天有什么不同？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-22",
+      "sourceText": "我喜欢目前居住的城市吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-23",
+      "sourceText": "最近最常吃的东西是什么?最怀念什么菜？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-24",
+      "sourceText": "最近经常光顾的店是哪一家？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-25",
+      "sourceText": "我现在最缺什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-26",
+      "sourceText": "最近想试试哪些新事物？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-27",
+      "sourceText": "最近皮肤状态怎么样?怎么护肤的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-28",
+      "sourceText": "最近的精神状态怎么样？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-29",
+      "sourceText": "现阶段的我有没有想念多年未见的人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "06-30",
+      "sourceText": "记录一件让自己觉得治愈的事。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-01",
+      "sourceText": "现阶段的我对未来的规划是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-02",
+      "sourceText": "还记得年初的目标吗?现在进展如何？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-03",
+      "sourceText": "上半年的日记空窗了吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-04",
+      "sourceText": "最近闲暇之余我在做什么？？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-05",
+      "sourceText": "记录专属于夏天的美好回忆。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-06",
+      "sourceText": "希望下半年的自己会有什么改变？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-07",
+      "sourceText": "最近一次深度聊天是什么时候?和谁?聊了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-08",
+      "sourceText": "最近的社交状态如何?喜欢和别人相处吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-09",
+      "sourceText": "最近吃过的一家餐厅是什么?体验怎么样？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-10",
+      "sourceText": "最近在社交软件上发了什么动态？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-11",
+      "sourceText": "现阶段的我想给自己什么忠告？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-12",
+      "sourceText": "最近做什么事情会让我忘记时间的存在？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-13",
+      "sourceText": "最近最想对哪些事情说\"不\"？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-14",
+      "sourceText": "最近喜欢收集什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-15",
+      "sourceText": "最近发生了什么意料之外的事情？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-16",
+      "sourceText": "喜欢的人或角色有什么共同点？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-17",
+      "sourceText": "最近总令我犹豫的事情有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-18",
+      "sourceText": "最近喜欢热闹还是安静？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-19",
+      "sourceText": "最近为想做的事情付出了什么努力？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-20",
+      "sourceText": "现在有什么喜欢做的事?喜欢吃的东西或喜欢去的地方？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-21",
+      "sourceText": "最近想要改进哪些地方？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-22",
+      "sourceText": "最近最冲动的消费或后悔购买的是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-23",
+      "sourceText": "当下的我是否相信命运能够改变？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-24",
+      "sourceText": "最近最常用的东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-25",
+      "sourceText": "现在住在哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-26",
+      "sourceText": "选三个词语来代表我自己,现在的我会选什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-27",
+      "sourceText": "记录一天中会让我感到幸福的三个时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-28",
+      "sourceText": "今年常用的电子设备有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-29",
+      "sourceText": "最近被推荐了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-30",
+      "sourceText": "最近了解到最离谱的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "07-31",
+      "sourceText": "现在的我觉得自己最典型的三个性格特征是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-01",
+      "sourceText": "我最看重的价值观是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-02",
+      "sourceText": "现在的我最欣赏自己哪些地方？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-03",
+      "sourceText": "最近喜欢什么味道？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-04",
+      "sourceText": "最近自然里的植物都是什么颜色？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-05",
+      "sourceText": "我在什么时候更容易焦虑？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-06",
+      "sourceText": "我在什么时候更有安全感？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-07",
+      "sourceText": "最近有什么奇思妙想的瞬间？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-08",
+      "sourceText": "我在什么时候最能感受到\"真实的自己\"？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-09",
+      "sourceText": "现在的我想培养自己什么性格特质？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-10",
+      "sourceText": "我想保留什么性格特质？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-11",
+      "sourceText": "我想改变什么性格特质？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-12",
+      "sourceText": "我喜欢什么天气？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-13",
+      "sourceText": "我如何描述自己?我眼中的自己是怎样的人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-14",
+      "sourceText": "\"自我认同\"对现阶段的我意味着什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-15",
+      "sourceText": "现在的我认为朋友的定义是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-16",
+      "sourceText": "现在的我觉得自己是更理性的人还是更感性的人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-17",
+      "sourceText": "突然获得了一天的空闲时间,我想去做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-18",
+      "sourceText": "最近发现了自己做什么事情的天赋？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-19",
+      "sourceText": "最近的能量来源是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-20",
+      "sourceText": "现在的我如何判断自己喜欢或爱一个人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-21",
+      "sourceText": "我如何处理与他人的冲突？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-22",
+      "sourceText": "今年主动联系的第一个人是谁？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-23",
+      "sourceText": "现在的我认为对自己的人生有多少掌控权？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-24",
+      "sourceText": "对现在的我来说,学习与自由是什么关系？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-25",
+      "sourceText": "最近一次因为学习而感到兴奋是什么时候？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-26",
+      "sourceText": "最近一个周末想做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-27",
+      "sourceText": "今天写完日记之后做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-28",
+      "sourceText": "最近随身携带的东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-29",
+      "sourceText": "我什么时候最容易感到疲惫？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-30",
+      "sourceText": "描述最近做的一个梦。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "08-31",
+      "sourceText": "现在的我最不喜欢自己什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-01",
+      "sourceText": "我觉得过去的我会怎么看待现在的我？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-02",
+      "sourceText": "我如何面对自己的恐惧？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-03",
+      "sourceText": "最近有哪些时刻感受到长大？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-04",
+      "sourceText": "最近一次体检是什么时候?结果如何？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-05",
+      "sourceText": "哪个瞬间让我感到非常平静？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-06",
+      "sourceText": "我容易忽视自己什么情绪？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-07",
+      "sourceText": "现在什么场合容易让我感到紧张？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-08",
+      "sourceText": "列出最不喜欢的一本书。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-09",
+      "sourceText": "做什么能让我快速放松下来？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-10",
+      "sourceText": "现阶段的我感受到的幸福是什么样的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-11",
+      "sourceText": "最近有什么想重新读的书？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-12",
+      "sourceText": "我想改掉自己的什么思维习惯？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-13",
+      "sourceText": "我理想的生活节奏是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-14",
+      "sourceText": "最近一次送别人礼物是什么时候?送的什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-15",
+      "sourceText": "今天我有什么新想法？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-16",
+      "sourceText": "最近花了太多时间在什么事情上？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-17",
+      "sourceText": "认为自己目前的思维局限在哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-18",
+      "sourceText": "自己现在的家庭角色是什么?明年希望承担什么角色？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-19",
+      "sourceText": "我希望在日常里增加什么事情？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-20",
+      "sourceText": "最近的计划都完成了吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-21",
+      "sourceText": "死亡对于现在的自己意味着什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-22",
+      "sourceText": "今年解决了什么重要问题？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-23",
+      "sourceText": "最近写过什么让自己满意的文字？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-24",
+      "sourceText": "最近一次看到日出是什么时候？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-25",
+      "sourceText": "我最想实现的梦想是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-26",
+      "sourceText": "当下有什么因为年龄而感觉到的变化？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-27",
+      "sourceText": "今年有和家人一起做过什么事？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-28",
+      "sourceText": "最近重新使用的闲置很久的东西是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-29",
+      "sourceText": "我对什么社会问题感到担忧？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "09-30",
+      "sourceText": "最近有收到什么好消息吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-01",
+      "sourceText": "对现在的工作满意吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-02",
+      "sourceText": "我希望为世界留下什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-03",
+      "sourceText": "记录一个自己的勇敢时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-04",
+      "sourceText": "形容一下理想中的自己。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-05",
+      "sourceText": "我觉得习惯塑造了怎样的我？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-06",
+      "sourceText": "最近有没有主动寻求过帮助？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-07",
+      "sourceText": "最近有没有主动帮助过他人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-08",
+      "sourceText": "从一段曾主动结束的关系中,我收获过什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-09",
+      "sourceText": "下雨天喜欢做什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-10",
+      "sourceText": "是否设想过自己的死亡和葬礼？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-11",
+      "sourceText": "我如何理解命运？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-12",
+      "sourceText": "记录我当下的恋爱观,或与另一半相处的观念。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-13",
+      "sourceText": "今晚的月亮是什么样子的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-14",
+      "sourceText": "我认为现在的我是一个有创造力的人吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-15",
+      "sourceText": "有没有在养宠物?或者有没有养宠物的打算?给我带来了什么?",
+      "status": "user_confirmed_source_completion",
+      "needsManualReview": false,
+      "provenance": "user_confirmed_source_completion"
+    },
+    {
+      "mmdd": "10-16",
+      "sourceText": "最近有什么事让我产生了深度思考？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-17",
+      "sourceText": "记录一件觉得可惜的事情。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-18",
+      "sourceText": "现在的自己接受了什么现实？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-19",
+      "sourceText": "最近自己缓解压力的方式是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-20",
+      "sourceText": "现在的我认为的成功是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-21",
+      "sourceText": "为自己写一份遗愿清单。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-22",
+      "sourceText": "现在存下了多少钱？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-23",
+      "sourceText": "我希望一年后的自己能在哪方面成长？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-24",
+      "sourceText": "比起上一年,现在我有哪些成长？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-25",
+      "sourceText": "今年利用碎片化时间做了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-26",
+      "sourceText": "现阶段的职业规划是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-27",
+      "sourceText": "我现在最珍惜的关系是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-28",
+      "sourceText": "自己的消费习惯有什么变化？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-29",
+      "sourceText": "写一个只有我自己知道的秘密。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-30",
+      "sourceText": "最近有对某件事或某个人产生了什么新认识吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "10-31",
+      "sourceText": "今年剩下的时间希望自己能完成什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-01",
+      "sourceText": "冬季有什么想实现的愿望？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-02",
+      "sourceText": "今年还没有完成的目标或心愿有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-03",
+      "sourceText": "今年有送自己什么礼物或有什么想送给自己的？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-04",
+      "sourceText": "现在的自己培养了哪些新爱好？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-05",
+      "sourceText": "对自己产生了什么新认识？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-06",
+      "sourceText": "在感情方面产生了什么新理解？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-07",
+      "sourceText": "有什么想要继续保留的习惯？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-08",
+      "sourceText": "今年参与过公益活动吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-09",
+      "sourceText": "今年有没有花时间精力关心重要的人？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-10",
+      "sourceText": "今年断舍离了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-11",
+      "sourceText": "今年的学习状况如何?在什么上投入最多？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-12",
+      "sourceText": "今年在运动方面有什么进步?尝试了什么新运动？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-13",
+      "sourceText": "今年的自己在什么事情上非常拖延？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-14",
+      "sourceText": "今年因为害怕而放弃了什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-15",
+      "sourceText": "今年突破了自己什么舒适区？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-16",
+      "sourceText": "今年完成了什么计划外的挑战？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-17",
+      "sourceText": "今年最有趣的经历是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-18",
+      "sourceText": "在今年我的心态发生了什么变化？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-19",
+      "sourceText": "今年有什么意外收获？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-20",
+      "sourceText": "今年实践了什么有效提高专注力的方法？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-21",
+      "sourceText": "今年改变或养成了什么习惯？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-22",
+      "sourceText": "下一年想改变什么习惯？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-23",
+      "sourceText": "现在的自己有对什么变得麻木了吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-24",
+      "sourceText": "今年的睡眠状况怎么样？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-25",
+      "sourceText": "今年的运动情况怎么样？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-26",
+      "sourceText": "如果今年重新过一次,我希望自己会改变什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-27",
+      "sourceText": "今年坚持最久的事是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-28",
+      "sourceText": "今年实践过的恢复精力的办法有什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-29",
+      "sourceText": "现在的自己想对一年前的自己说什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "11-30",
+      "sourceText": "现在的自己想对一年后的自己说什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-01",
+      "sourceText": "今年去过哪些地方?最远的地方是哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-02",
+      "sourceText": "明年的手帐体系。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-03",
+      "sourceText": "今年有什么防止焦虑和内耗的办法？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-04",
+      "sourceText": "写下喜欢现在的自己的三个原因。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-05",
+      "sourceText": "列出今年的年度爱用物。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-06",
+      "sourceText": "用自己的标准评选出一位今年对我来说的风云人物/重要人物。",
+      "status": "user_confirmed_source_completion",
+      "needsManualReview": false,
+      "provenance": "user_confirmed_source_completion"
+    },
+    {
+      "mmdd": "12-07",
+      "sourceText": "今年最困难的三件事或三个时刻。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-08",
+      "sourceText": "今年最高兴的三件事。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-09",
+      "sourceText": "今年我最关心的事情是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-10",
+      "sourceText": "今年有认识新朋友吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-11",
+      "sourceText": "今年有慢慢失去联系的朋友吗？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-12",
+      "sourceText": "今年始终保持联系的人有哪些？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-13",
+      "sourceText": "今年完成了哪些目标？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-14",
+      "sourceText": "今年最难忘的一件事或瞬间是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-15",
+      "sourceText": "今年的财务情况怎么样?总结今年的收支。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-16",
+      "sourceText": "这一年世界发生了什么事?我如何评价这一年？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-17",
+      "sourceText": "满分十分,给今年的自己打几分？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-18",
+      "sourceText": "今年收到最喜欢的礼物是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-19",
+      "sourceText": "今年最喜欢的电影是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-20",
+      "sourceText": "今年最喜欢的书是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-21",
+      "sourceText": "今年最大的进步是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-22",
+      "sourceText": "从个人成长方面总结这一年。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-23",
+      "sourceText": "今年最喜欢的地方是哪里？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-24",
+      "sourceText": "今年在什么事情上开销最多?最大的一笔开支是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-25",
+      "sourceText": "今年最喜欢自己哪套穿搭？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-26",
+      "sourceText": "列出今年的得与失。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-27",
+      "sourceText": "今年最喜欢的照片是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-28",
+      "sourceText": "今年收到了哪些生日礼物与祝福？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-29",
+      "sourceText": "今年最大的变化是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-30",
+      "sourceText": "总结自己今年的状态。",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    },
+    {
+      "mmdd": "12-31",
+      "sourceText": "今年最喜欢的一段话是什么？",
+      "status": "verified_from_recording",
+      "needsManualReview": false
+    }
+  ]
+}

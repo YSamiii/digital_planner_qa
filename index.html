@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-build="v0.23.2-canonical-slimming-iphone-qa1-20261005">
+<html lang="zh-CN" data-build="v0.23.3-forwarding-warehouse-state-fix-iphone-qa1-20261006">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
@@ -357,15 +357,17 @@
 <script src="./js/historical-dual-import.js?v=0232canonicalslimmingqa1-20261005"></script>
 <script src="./js/timeline-filter.js?v=0220recoverypreviewclassificationfixqa"></script>
 <script src="./js/daily-question-calendar.js?v=0220recoverypreviewclassificationfixqa"></script>
-<script src="./js/persistence-foundation.js?v=0231storagequotasafetyqa1-20261005"></script>
+<script src="./js/persistence-foundation.js?v=0233forwardingwarehousestatefixqa1-20261006"></script>
 <script src="./js/storage-footprint-analyzer.js?v=0231storagequotasafetyqa1-20261005"></script>
-<script src="./js/app.js?v=0232canonicalslimmingqa1-20261005"></script>
+<script src="./js/app.js?v=0233forwardingwarehousestatefixqa1-20261006"></script>
 <script src="./js/persistence-health.js?v=0220datasafetyp0qa"></script>
 <script src="./js/v0200-dashboard-forwarding-backup.js?v=0230todayfocusqa1-20260916"></script>
 <script src="./js/no-spend-today-quick-checkin.js?v=0230nospendquickcheckinqa4-20261003"></script>
 <script src="./js/v0210-backup-plan.js?v=0220recoverypreviewclassificationfixqa"></script>
 <script src="./js/v0220-nospend-readonly-diagnostic.js?v=0220recoverypreviewclassificationfixqa"></script>
-<script src="./js/v0220-data-safety-build.js?v=0232canonicalslimmingqa1-20261005"></script>
+<script src="./js/v0220-data-safety-build.js?v=0233forwardingwarehousestatefixqa1-20261006"></script>
 <div id="growthExportModal" class="modal" onclick="if(event.target===this)closeGrowthExport()"><section class="modal-sheet"><header class="modal-header"><div class="modal-heading"><div class="kicker">GROWTH EXPORT</div><h2>导出成长日记</h2></div><button class="modal-close" onclick="closeGrowthExport()">×</button></header><div class="modal-body"><label>时间范围</label><select id="growthExportRange" onchange="updateGrowthExportRange()"><option value="thisWeek">本周</option><option value="lastWeek">上周</option><option value="thisMonth">本月</option><option value="lastMonth">上月</option><option value="custom">自定义日期范围</option></select><div id="growthExportCustom" class="form-grid" hidden><div class="form-field"><label>开始日期</label><div class="date-field"><input id="growthExportStart" type="date" onchange="previewGrowthExport()"></div></div><div class="form-field"><label>结束日期</label><div class="date-field"><input id="growthExportEnd" type="date" onchange="previewGrowthExport()"></div></div></div><p id="growthExportPreview" class="section-note"></p><p class="small">包含今日成长摘要、详细记录、标签与来源类型；不导出二进制附件。</p></div><footer class="modal-footer"><button class="btn secondary" onclick="copyGrowthExport()">复制为文本</button><button class="btn secondary" onclick="downloadGrowthExport('md')">导出 Markdown</button><button class="btn primary" onclick="downloadGrowthExport('json')">导出 JSON</button></footer></section></div>
 </body>
 </html>
+
+

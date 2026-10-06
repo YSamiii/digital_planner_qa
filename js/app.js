@@ -1,9 +1,9 @@
-window.JOURNAL_BUILD='v0.23.2-canonical-slimming-iphone-qa1-20261005';
-document.documentElement.dataset.runtimeBuild='v0.23.2-canonical-slimming-iphone-qa1-20261005';
+window.JOURNAL_BUILD='v0.23.3-forwarding-warehouse-state-fix-iphone-qa1-20261006';
+document.documentElement.dataset.runtimeBuild='v0.23.3-forwarding-warehouse-state-fix-iphone-qa1-20261006';
 const {createProductivityModule, createNoSpendModule, createCollectionsModule, createSubscriptionModule, createMediaStore, createSnapshotStore, createLegacyJournalPayloadStore, createInventoryModule, createRecurrenceHelper, createSellersModule, createOrdersModule, createTodayDashboard, createOneLineImport, createTimelineFilter, createFiveYearJournal, createHistoricalDualImporter, createLegacyJournalPayloadManager, analyzeLegacyJournalFootprint} = window.JournalModules || {};
 const KEY='journal-planner-qa-v091';
-const APP_VERSION='0.23.2';
-const BUILD_LABEL='Canonical Slimming iPhone QA1';
+const APP_VERSION='0.23.3';
+const BUILD_LABEL='Forwarding Warehouse State Fix iPhone QA1';
 window.APP_VERSION=APP_VERSION;
 const LEGACY_KEYS=['journal-planner-qa-v090','journal-planner-qa-v081','journal-planner-qa-v052','journal-planner-qa-v070','journal-planner-qa-v051','journal-planner-qa-v03','journal-planner-qa-v031','journal-planner-qa-v04','journal-planner-qa-v05'];
 const INVENTORY_SORT_MODES=['added','updated','created','az','za','quantityAsc','quantityDesc','expiry'];
@@ -891,7 +891,7 @@ function saveLong(){
 }
 function renderPhotos(){qs('#photoGrid').innerHTML=Array.from({length:28},(_,i)=>`<div class="photo-ph">${i%6===0?'✦':''}</div>`).join('')}
 async function exportData(){
-  try{const media=await mediaStore.exportForBackup(),legacyJournalPayloadsForBackup=await legacyJournalPayloads.exportForBackup(state.legacyJournalRecords||[]),importProvenancePayloads=await legacyJournalPayloads.exportOneLineProvenanceForBackup(state.importProvenance?.one_line_a_day);const blob=new Blob([JSON.stringify({version:12,schemaVersion:state.schemaVersion,appVersion:APP_VERSION,backupVersion:2,exportedAt:new Date().toISOString(),state,media,legacyJournalPayloads:legacyJournalPayloadsForBackup,importProvenancePayloads},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='journal-planner-qa-backup-v0232.json';a.click();URL.revokeObjectURL(a.href)}catch(e){alert('备份失败：'+(e.message||'历史日记 payload、导入来源或媒体无法导出'))}
+  try{const media=await mediaStore.exportForBackup(),legacyJournalPayloadsForBackup=await legacyJournalPayloads.exportForBackup(state.legacyJournalRecords||[]),importProvenancePayloads=await legacyJournalPayloads.exportOneLineProvenanceForBackup(state.importProvenance?.one_line_a_day);const blob=new Blob([JSON.stringify({version:12,schemaVersion:state.schemaVersion,appVersion:APP_VERSION,backupVersion:2,exportedAt:new Date().toISOString(),state,media,legacyJournalPayloads:legacyJournalPayloadsForBackup,importProvenancePayloads},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='journal-planner-qa-backup-v0233.json';a.click();URL.revokeObjectURL(a.href)}catch(e){alert('备份失败：'+(e.message||'历史日记 payload、导入来源或媒体无法导出'))}
 }
 function importData(ev){
   const f=ev.target.files[0];if(!f)return;const r=new FileReader();
@@ -1228,7 +1228,7 @@ else boot();
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js?v=0232canonicalslimmingqa1-20261005').catch(err=>console.warn('SW registration failed',err));
+    navigator.serviceWorker.register('./sw.js?v=0233forwardingwarehousestatefixqa1-20261006').catch(err=>console.warn('SW registration failed',err));
   });
 }
 
@@ -1337,7 +1337,7 @@ function v0190FinalForwardingUI(){
 const v0190FinalOpenOrder=window.openOrderEditor;window.openOrderEditor=function(id=''){v0190FinalOpenOrder(id);qs('#orderModal').dataset.v0190FinalOrderId=id||'';v0190FinalForwardingUI();};
 const v0190FinalBatchChanged=window.orderBatchChanged;window.orderBatchChanged=function(){v0190FinalBatchChanged();setTimeout(v0190FinalForwardingUI,0);};
 const v0190FinalToggleFulfillment=window.toggleOrderFulfillment;window.toggleOrderFulfillment=function(){v0190FinalToggleFulfillment();setTimeout(v0190FinalForwardingUI,0);};
-const v0190FinalSaveOrder=window.saveOrder;window.saveOrder=async function(){const id=qs('#orderModal')?.dataset.v0190FinalOrderId||'',previous=state.orders?.items?.find(item=>item.id===id),previousForward=JSON.parse(JSON.stringify(previous?.forwarding||{})),pre=qs('#orderPreShipmentStage')?.value||previousForward.preForwardingStage||'ordered',independent=qs('#orderIndependentStatus')?.value||'',batchId=qs('#orderBatch')?.value||'',before=new Set((state.orders?.items||[]).map(item=>item.id));const initialResult=await v0190FinalSaveOrder();if(initialResult?.ok===false)return initialResult;const order=id?(state.orders?.items||[]).find(item=>item.id===id):(state.orders?.items||[]).find(item=>!before.has(item.id));if(!order?.forwarding)return initialResult;const f=order.forwarding;f.overrideEnabled=false;f.independentStatus=batchId?independent:'';if(batchId){const entering=!previousForward.batchId||previousForward.batchId!==batchId;const previousStage=previousForward.preForwardingStage||pre;if(entering&&['','ordered','not_received_warehouse'].includes(previousStage))f.preForwardingStage='received_warehouse';else f.preForwardingStage=previousStage||'received_warehouse';}else{f.preForwardingStage=previousForward.preForwardingStage||pre||'ordered';}const finalResult=save();if(finalResult.ok)window.renderOrders?.();return finalResult;};
+const v0190FinalSaveOrder=window.saveOrder;window.saveOrder=async function(){const id=qs('#orderModal')?.dataset.v0190FinalOrderId||'',previous=state.orders?.items?.find(item=>item.id===id),previousForward=JSON.parse(JSON.stringify(previous?.forwarding||{})),pre=qs('#orderPreShipmentStage')?.value||previousForward.preForwardingStage||'ordered',independent=qs('#orderIndependentStatus')?.value||'',batchId=qs('#orderBatch')?.value||'',before=new Set((state.orders?.items||[]).map(item=>item.id));const initialResult=await v0190FinalSaveOrder();if(initialResult?.ok===false)return initialResult;const order=id?(state.orders?.items||[]).find(item=>item.id===id):(state.orders?.items||[]).find(item=>!before.has(item.id));if(!order?.forwarding)return initialResult;const f=order.forwarding;f.overrideEnabled=false;f.independentStatus=batchId?'':independent;if(batchId){const entering=!previousForward.batchId||previousForward.batchId!==batchId;const previousStage=previousForward.preForwardingStage||pre;if(entering&&['','ordered','not_received_warehouse'].includes(previousStage))f.preForwardingStage='received_warehouse';else f.preForwardingStage=previousStage||'received_warehouse';}else{f.preForwardingStage=previousForward.preForwardingStage||pre||'ordered';}const finalResult=save();if(finalResult.ok)window.renderOrders?.();return finalResult;};
 const v0200OrdersTraceSaveOrder=window.saveOrder;window.saveOrder=async function(...args){const draft={source:'global saveOrder',editorOrderId:qs('#orderModal')?.dataset.v0190FinalOrderId||'',seller:qs('#orderSeller')?.value||'',fulfillmentType:qs('#orderFulfillment')?.value||'',status:qs('#orderStatus')?.value||'',items:[...document.querySelectorAll('#orderItems [data-order-item]')].map(row=>({id:row.dataset.itemId||'',name:row.querySelector('.oi-name')?.value||'',quantity:row.querySelector('.oi-qty')?.value||''})),notes:qs('#orderNotes')?.value||''};ordersSaveDiagnostics.begin(draft);ordersPersistenceDiagnostics.begin(draft);try{const result=await v0200OrdersTraceSaveOrder(...args);ordersSaveDiagnostics.finish();return result;}catch(error){ordersSaveDiagnostics.record('save_handler_error',{error:String(error?.message||error)});ordersPersistenceDiagnostics.recordFailure('saveOrder wrapper',error);ordersSaveDiagnostics.finish();throw error;}};
 const v0190FinalOpenBatch=window.openBatchEditor;window.openBatchEditor=function(id=''){v0190FinalOpenBatch(id);const handoff=qs('#batchHandoffField');if(handoff)handoff.hidden=true;};
 Object.assign(window,{openOrderEditor:window.openOrderEditor,orderBatchChanged:window.orderBatchChanged,toggleOrderFulfillment:window.toggleOrderFulfillment,saveOrder:window.saveOrder,openBatchEditor:window.openBatchEditor});
@@ -1524,3 +1524,5 @@ function commitRecoveryAllDataImport(){
   }catch(error){state=original;recoverySaveFailure({message:error?.message||error});}
 }
 Object.assign(window,{openRecoveryAllDataImport,prepareRecoveryAllDataImport,closeRecoveryAllDataImport,commitRecoveryAllDataImport,recoveryAllDataImportTestHook:()=>({draft:recoveryAllDataDraft,engine:recoveryImportEngine})});
+
+

@@ -53,17 +53,28 @@
   function commitCanonical({storage,key,payload,onAttempt,onSuccess,onFailure,verifyReadBack,compactRetry=true}){
     const candidate=String(payload??'');
     const info={key:String(key),candidateBytes:byteLength(candidate),stagingBytes:0,shadowBytes:0,temporaryBytes:0,retryCount:0,compact:null};
+    let previousRaw;
+    try{previousRaw=storage.getItem(key);}catch(error){const failure={ok:false,stage:'localStorage.getItem',errorName:error?.name||'Error',message:error?.message||String(error||'读取保存前内容失败'),persisted:false,retryCount:0,commitFootprint:{candidateBytes:info.candidateBytes,stagingBytes:0,shadowBytes:0,temporaryBytes:0}};onFailure?.(failure);return failure;}
+    const restorePrevious=()=>{
+      try{if(previousRaw===null)storage.removeItem(key);else storage.setItem(key,previousRaw);return {restored:true};}
+      catch(error){return {restored:false,error};}
+    };
     const attempt=phase=>{
+      let wroteCandidate=false;
       try{
         onAttempt?.({phase,payload:candidate,...info});
         storage.setItem(key,candidate);
+        wroteCandidate=true;
         const readBack=storage.getItem(key);
         if(readBack!==candidate)throw new Error('持久化 read-back 校验失败');
         const verified=typeof verifyReadBack==='function'?verifyReadBack(readBack):null;
         const result={ok:true,stage:'read-back',persisted:true,payloadBytes:info.candidateBytes,retryCount:info.retryCount,verified,commitFootprint:{candidateBytes:info.candidateBytes,stagingBytes:0,shadowBytes:0,temporaryBytes:0}};
         onSuccess?.({phase,payload:candidate,...result});
         return result;
-      }catch(error){return {ok:false,error,stage:phase==='initial'?'localStorage.setItem':'compact-retry'};}
+      }catch(error){
+        const rollback=wroteCandidate?restorePrevious():null;
+        return {ok:false,error,rollback,stage:phase==='initial'?'localStorage.setItem':'compact-retry'};
+      }
     };
     let result=attempt('initial');
     if(result.ok)return result;

@@ -18,7 +18,58 @@
   function validSnapshot(record,expectedId=''){return !!record&&(!expectedId||record.snapshotId===expectedId)&&record.payload&&typeof record.payload==='object'&&Number(record.schemaVersion)>=0&&Number(record.payloadBytes)===snapshotBytes(record.payload);}
   const snapshotStore={async put(record){if(!record?.snapshotId||!record.payload||typeof record.payload!=='object')throw new Error('Invalid snapshot payload');const prepared={snapshotId:record.snapshotId,createdAt:record.createdAt||new Date().toISOString(),reason:record.reason||'',appVersion:record.appVersion||'',schemaVersion:Number(record.schemaVersion)||0,dataVersion:Number(record.dataVersion)||1,recordCounts:record.recordCounts&&typeof record.recordCounts==='object'?record.recordCounts:{},checksum:record.checksum||'',payload:record.payload,payloadBytes:snapshotBytes(record.payload)};await run(SNAPSHOT_STORE,'readwrite',store=>store.put(prepared));const readBack=await run(SNAPSHOT_STORE,'readonly',store=>store.get(prepared.snapshotId));if(!validSnapshot(readBack,prepared.snapshotId))throw new Error('Snapshot read-back validation failed');return readBack;},get:id=>run(SNAPSHOT_STORE,'readonly',store=>store.get(id)),async remove(id){if(id)await run(SNAPSHOT_STORE,'readwrite',store=>store.delete(id));},async list(){return (await run(SNAPSHOT_STORE,'readonly',store=>store.getAll())||[]).map(record=>({...record,payload:undefined}));},validate:validSnapshot};
   window.JournalModules=window.JournalModules||{};
+  /* QA-only full-backup support.  Both affected stores live in the QA-owned
+     database, so replacement is one IndexedDB transaction rather than a
+     sequence of independently visible writes. */
+  function createQaFullBackupStore(){
+    const clone=value=>JSON.parse(JSON.stringify(value));
+    const readAll=storeName=>run(storeName,'readonly',store=>store.getAll());
+    const ids=rows=>new Set((rows||[]).map(row=>String(row?.id||'')));
+    const decode=(data,mime)=>{const binary=atob(data),bytes=new Uint8Array(binary.length);for(let index=0;index<binary.length;index++)bytes[index]=binary.charCodeAt(index);return new Blob([bytes],{type:mime||'application/octet-stream'});};
+    function mediaRecord(record){
+      if(!record?.id||typeof record.data!=='string')throw new Error('QA_BACKUP_INVALID_MEDIA');
+      return {id:String(record.id),blob:decode(record.data,record.mime),mime:String(record.mime||'application/octet-stream'),createdAt:record.createdAt||Date.now(),ownerType:String(record.ownerType||''),ownerId:String(record.ownerId||'')};
+    }
+    function payloadRecord(record){
+      if(!record?.id||typeof record!=='object')throw new Error('QA_BACKUP_INVALID_LEGACY_PAYLOAD');
+      return clone(record);
+    }
+    async function capture(){
+      const [media,payloads]=await Promise.all([readAll(MEDIA_STORE),readAll(LEGACY_JOURNAL_PAYLOAD_STORE)]);
+      return {media:media||[],payloads:payloads||[]};
+    }
+    async function replaceFromBackup(mediaRows,payloadRows){
+      const preparedMedia=(mediaRows||[]).map(mediaRecord),preparedPayloads=(payloadRows||[]).map(payloadRecord);
+      if(ids(preparedMedia).size!==preparedMedia.length||ids(preparedPayloads).size!==preparedPayloads.length)throw new Error('QA_BACKUP_DUPLICATE_ID');
+      const db=await open();
+      await new Promise((resolve,reject)=>{
+        const tx=db.transaction([MEDIA_STORE,LEGACY_JOURNAL_PAYLOAD_STORE],'readwrite');
+        const media=tx.objectStore(MEDIA_STORE),payloads=tx.objectStore(LEGACY_JOURNAL_PAYLOAD_STORE);
+        try{media.clear();payloads.clear();preparedMedia.forEach(row=>media.put(row));preparedPayloads.forEach(row=>payloads.put(row));}catch(error){try{tx.abort();}catch(_){ }reject(error);return;}
+        tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('QA_BACKUP_IDB_WRITE_FAILED'));tx.onabort=()=>reject(tx.error||new Error('QA_BACKUP_IDB_WRITE_ABORTED'));
+      });
+      return verifyBackupRows(preparedMedia,preparedPayloads);
+    }
+    async function replaceCaptured(snapshot){
+      const db=await open();
+      await new Promise((resolve,reject)=>{
+        const tx=db.transaction([MEDIA_STORE,LEGACY_JOURNAL_PAYLOAD_STORE],'readwrite');
+        const media=tx.objectStore(MEDIA_STORE),payloads=tx.objectStore(LEGACY_JOURNAL_PAYLOAD_STORE);
+        try{media.clear();payloads.clear();(snapshot?.media||[]).forEach(row=>media.put(row));(snapshot?.payloads||[]).forEach(row=>payloads.put(row));}catch(error){try{tx.abort();}catch(_){ }reject(error);return;}
+        tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('QA_BACKUP_IDB_ROLLBACK_FAILED'));tx.onabort=()=>reject(tx.error||new Error('QA_BACKUP_IDB_ROLLBACK_ABORTED'));
+      });
+      return {ok:true};
+    }
+    async function verifyBackupRows(expectedMedia,expectedPayloads){
+      const current=await capture(),mediaIds=ids(current.media),payloadIds=ids(current.payloads),expectedMediaIds=ids(expectedMedia),expectedPayloadIds=ids(expectedPayloads);
+      const same=(a,b)=>a.size===b.size&&[...a].every(item=>b.has(item));
+      if(!same(mediaIds,expectedMediaIds)||!same(payloadIds,expectedPayloadIds))throw new Error('QA_BACKUP_IDB_READBACK_FAILED');
+      return {ok:true,mediaCount:mediaIds.size,payloadCount:payloadIds.size};
+    }
+    return {capture,replaceFromBackup,replaceCaptured,verifyBackupRows,contract:{dbName:DB_NAME,stores:[MEDIA_STORE,LEGACY_JOURNAL_PAYLOAD_STORE]}};
+  }
   window.JournalModules.createMediaStore=createMediaStore;
   window.JournalModules.createSnapshotStore=()=>snapshotStore;
   window.JournalModules.createLegacyJournalPayloadStore=createLegacyJournalPayloadStore;
+  window.JournalModules.createQaFullBackupStore=createQaFullBackupStore;
 })();

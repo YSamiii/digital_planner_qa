@@ -2,7 +2,7 @@
    This layer uses the established canonical state + IndexedDB snapshot store. */
 (function(){
   'use strict';
-  const BUILD='0.21.0-stable-baseline';
+  const BUILD=window.JOURNAL_BUILD||'0.21.0-stable-baseline';
   document.documentElement.dataset.runtimeBuild=BUILD;
   window.JOURNAL_BUILD=BUILD;
   const $=selector=>document.querySelector(selector);
@@ -12,6 +12,9 @@
   const dayKey=()=>isoLocal(new Date());
   const snapshotStore=window.snapshotStore;
   const health=window.PersistenceHealth;
+  const qaFullBackupStore=window.JournalModules?.createQaFullBackupStore?.();
+  const qaFullBackupParser=window.QAFullBackupRestore;
+  let qaFullBackupDraft=null;
 
   function ensureSafety(){
     state.settings=state.settings&&typeof state.settings==='object'?state.settings:{};
@@ -63,6 +66,40 @@
     const elapsed=Math.floor((Date.now()-Date.parse(last))/86400000);
     return {enabled:true,overdue:elapsed>=days,text:`距离上次完整备份已 ${Math.max(0,elapsed)} 天`,elapsed,days};
   }
+  function qaRestoreSummaryHtml(){
+    if(!qaFullBackupDraft)return '<p class="small">选择正式版导出的完整备份文件后，先显示只读预检摘要，再由你确认恢复。</p>';
+    const meta=qaFullBackupDraft.envelope,summary=qaFullBackupDraft.summary;
+    return `<div class="section-note"><b>备份预检完成</b><br>来源 v${esc(meta.appVersion||'—')} · schema ${esc(meta.schemaVersion)} · Backup v${esc(meta.backupVersion)}<br>日记 ${summary.entries} · Daily ${summary.dailyDates} 天 · Orders ${summary.orders} · Inventory ${summary.inventory}<br>历史记录 ${summary.legacyRecords} · legacy payload ${summary.legacyPayloads} · provenance payload ${summary.provenancePayloads} · media ${summary.media}<br>内部 snapshot payload：未包含在当前完整备份格式中，不会作为 QA 恢复内容。</div><div class="btns"><button class="btn secondary" type="button" onclick="clearQaFullBackupRestore()">取消</button><button class="btn primary" type="button" onclick="confirmQaFullBackupRestore()">确认恢复到 QA</button></div>`;
+  }
+  function qaRestoreSectionHtml(){
+    return `<section class="backup-user-section" data-qa-full-backup-restore><h3>导入完整备份到 QA</h3><p class="small">选择正式版导出的完整备份。恢复后会替换当前 QA 数据，但不会修改正式版。</p><input id="qaFullBackupFile" type="file" accept="application/json,.json" hidden onchange="prepareQaFullBackupRestore(event)"><button class="btn secondary" type="button" onclick="openQaFullBackupFilePicker()">选择完整备份文件</button><div id="qaFullBackupRestorePreview">${qaRestoreSummaryHtml()}</div></section>`;
+  }
+  function qaRestoreError(error){
+    const code=String(error?.message||error||'QA_BACKUP_RESTORE_FAILED');
+    const labels={QA_BACKUP_INVALID_JSON:'备份文件不是有效 JSON。',QA_BACKUP_UNSUPPORTED_FORMAT:'不支持的完整备份格式。',QA_BACKUP_UNSUPPORTED_SCHEMA:'备份 schema 不兼容。',QA_BACKUP_LEGACY_REF_MISSING:'备份缺少历史日记 payload。',QA_BACKUP_PROVENANCE_REF_MISSING:'备份缺少 One Line provenance payload。',QA_BACKUP_MEDIA_REF_MISSING:'备份缺少被引用的媒体。',QA_BACKUP_IDB_READBACK_FAILED:'QA IndexedDB read-back 验证失败。'};
+    return labels[code]||'恢复失败，QA 数据未完成替换。正式版数据未修改。';
+  }
+  function qaCandidateWithProtection(candidate){
+    const next=clone(candidate),currentSafety=clone(ensureSafety());
+    next.schemaVersion=12;next.settings=next.settings&&typeof next.settings==='object'?next.settings:{};
+    next.settings.autoProtection={...(next.settings.autoProtection||{}),snapshots:currentSafety.snapshots||[],lastKnownHealthySnapshotId:currentSafety.lastKnownHealthySnapshotId||'',dataProtectionWarning:currentSafety.dataProtectionWarning||null};
+    return hydrateAppState(next);
+  }
+  function commitQaRestoreCandidate(candidate){
+    if(window.isPersistenceSafeMode?.())return {ok:false,stage:'persistence_safe_mode',message:'Persistence Safe Mode: QA restore is paused.'};
+    let payload;try{payload=JSON.stringify(candidate);}catch(error){return {ok:false,stage:'stringify',message:error?.message||String(error)};}
+    const result=window.PersistenceFoundation?.commitCanonical?.({storage:localStorage,key:KEY,payload,verifyReadBack:raw=>{
+      const persisted=JSON.parse(raw),validation=health?.validateRestorePayload(persisted)||{ok:true};
+      if(!validation.ok||Number(persisted?.schemaVersion)!==12)throw new Error('QA_BACKUP_CANONICAL_READBACK_FAILED');
+      return {schemaVersion:persisted.schemaVersion};
+    }});
+    if(!result?.ok)return {ok:false,stage:result?.stage||'commit',message:result?.message||'QA canonical commit failed'};
+    return {ok:true,payload,result};
+  }
+  async function readQaBackupFile(file){
+    if(!file)throw new Error('QA_BACKUP_FILE_MISSING');
+    return typeof file.text==='function'?file.text():new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsText(file);});
+  }
   function nextAutoCopy(safety){const today=dayKey(),hasToday=safety.snapshots.some(row=>row.reason==='daily_protection'&&String(row.createdAt||'').slice(0,10)===today)||String(safety.lastAutomaticSnapshotAt||'').slice(0,10)===today;if(!safety.enabled)return '自动保护已关闭';if(hasToday)return '今天已完成自动保护检查；明天目标时间后首次打开 App 时再检查。';return `今天 ${safety.time} 后首次打开 App 时，如尚未生成快照则创建一次。`;}
 
   function ensureBackupModal(){
@@ -76,6 +113,8 @@
     body.innerHTML=`<section class="backup-user-section"><h3>数据保护状态</h3><p class="section-note">${esc(protectionCopy)}</p><button class="btn secondary" type="button" onclick="document.querySelector('#backupRestoreBody .manage-list')?.scrollIntoView({behavior:'smooth',block:'start'})">查看快照</button></section><section class="backup-user-section"><h3>自动保护</h3><p class="small">iPhone / PWA 无法保证在 ${esc(safety.time)} 准时后台运行。当天目标时间后首次打开 App，且当天尚未生成快照时，才会自动创建一次。</p><label><input id="backupAutoEnabled" type="checkbox" ${safety.enabled?'checked':''}> 自动保护已${safety.enabled?'开启':'关闭'}</label><div class="form-grid"><div class="form-field"><label>每日目标时间</label><div class="date-field"><input id="backupAutoTime" type="time" value="${esc(safety.time)}"></div></div><div class="form-field"><label>保留快照</label><input id="backupRetention" type="number" min="1" max="90" value="${safety.retention}"></div></div><button class="btn secondary" type="button" onclick="saveBackupProtectionSettings()">保存自动保护设置</button><div class="section-note">最近自动保护：${esc(formatWhen(rows.find(row=>row.reason==='daily_protection')?.createdAt))}<br>当前保存 ${rows.length} 个快照 · 保留上限 ${safety.retention}<br>${esc(nextAutoCopy(safety))}</div></section>
       <section class="backup-user-section"><h3>手动备份</h3><button class="btn primary" type="button" onclick="createManualInternalSnapshot()">立即创建内部快照</button><p class="small">内部快照保存在此设备，用于安全恢复；创建后会进行 read-back 验证。</p><button class="btn secondary" type="button" onclick="exportFullBackupV21()">导出完整备份</button><p class="small">最近完整备份：${esc(safety.lastExternalBackupAt?formatWhen(safety.lastExternalBackupAt):'尚未导出完整备份')}</p><label>完整备份提醒<select id="backupReminderInterval"><option value="0">关闭</option><option value="7">每 7 天</option><option value="14">每 14 天</option><option value="30">每 30 天</option></select></label><button class="btn secondary" type="button" onclick="saveBackupReminderSettings()">保存提醒设置</button>${reminder.enabled?`<p class="section-note">${esc(reminder.text)}</p>`:''}</section>
       <section class="backup-user-section"><h3>恢复与历史快照</h3><p class="small">从快照恢复会替换当前 App 数据。开始前会先创建并验证一份恢复前保护快照。</p><div class="manage-list">${rows.map(row=>`<article class="manage-row"><span><b>${esc(formatWhen(row.createdAt))}</b><small>${esc(typeLabel(row.reason))} · ${Math.round((row.payloadBytes||0)/1024)} KB · v${esc(row.appVersion||'—')} · schema ${esc(row.schemaVersion??'—')}<br>${esc(snapshotSummary(row))}</small></span><span class="manage-actions"><button type="button" onclick="openSnapshotDetail('${esc(row.snapshotId)}')">详情</button><button type="button" class="danger" onclick="deleteInternalSnapshot('${esc(row.snapshotId)}')">删除</button></span></article>`).join('')||'<p class="small">还没有内部快照。</p>'}</div></section>`;
+    const restoreHistory=[...body.querySelectorAll('.backup-user-section')].at(-1);
+    restoreHistory?.insertAdjacentHTML('beforebegin',qaRestoreSectionHtml());
     $('#backupReminderInterval').value=String(Number(safety.externalReminderDays)||0);
   }
   window.openBackupRestore=function(){ensureBackupModal();renderBackupRestore();modalController.open('backupRestoreModal');};
@@ -84,6 +123,37 @@
   window.saveBackupReminderSettings=function(){const safety=ensureSafety();safety.externalReminderDays=Number($('#backupReminderInterval').value)||0;const result=save();if(result?.ok===false)alert(result.message||'提醒设置未保存。');renderBackupRestore();};
   window.createManualInternalSnapshot=async function(){try{const gate=currentHealthGate();if(!gate.allowed&&!confirm('检测到异常数据变化。内部快照将只标记为“疑似异常”，不会覆盖 Last Known Healthy。仍要创建？'))return;const meta=await createSnapshot('manual_snapshot',{healthGate:gate});renderBackupRestore();alert(`内部快照已创建并验证：${formatWhen(meta.createdAt)}`);}catch(error){alert(`创建内部快照失败：${error.message||error}`);}};
   window.exportFullBackupV21=async function(){try{const gate=currentHealthGate();if(!gate.allowed&&!confirm('当前数据状态可能异常，此备份仅保存当前状态。仍要导出？'))return;await window.exportDataV20?.();const safety=ensureSafety();safety.lastExternalBackupAt=new Date().toISOString();const result=save();if(result?.ok===false)throw new Error(result.message||'完整备份时间未保存');renderBackupRestore();}catch(error){alert(`导出完整备份失败：${error.message||error}`);}};
+  window.openQaFullBackupFilePicker=function(){const input=$('#qaFullBackupFile');if(!input)return;input.value='';input.click();};
+  window.clearQaFullBackupRestore=function(){qaFullBackupDraft=null;const input=$('#qaFullBackupFile');if(input)input.value='';const preview=$('#qaFullBackupRestorePreview');if(preview)preview.innerHTML=qaRestoreSummaryHtml();};
+  window.prepareQaFullBackupRestore=async function(event){
+    try{
+      const text=await readQaBackupFile(event?.target?.files?.[0]),draft=qaFullBackupParser?.parse?.(text,{validateState:health?.validateRestorePayload});
+      if(!draft)throw new Error('QA_BACKUP_PARSER_UNAVAILABLE');
+      qaFullBackupDraft=draft;const preview=$('#qaFullBackupRestorePreview');if(preview)preview.innerHTML=qaRestoreSummaryHtml();
+    }catch(error){qaFullBackupDraft=null;const preview=$('#qaFullBackupRestorePreview');if(preview)preview.innerHTML=`<p class="notice error">${esc(qaRestoreError(error))}</p>`;}
+  };
+  window.confirmQaFullBackupRestore=async function(){
+    const draft=qaFullBackupDraft;
+    if(!draft)return;
+    if(!qaFullBackupStore){alert('恢复不可用：QA IndexedDB 恢复组件未加载。');return;}
+    if(!confirm('确认将此完整备份恢复到 QA？\n\n当前 QA 数据会被替换。\n正式版数据不会被修改。'))return;
+    let previousIdb=null,idbReplaced=false,canonicalCommitted=false;
+    try{
+      previousIdb=await qaFullBackupStore.capture();
+      const protection=await createSnapshot('pre_restore_snapshot',{healthGate:currentHealthGate()});
+      if(!protection?.snapshotId)throw new Error('QA_BACKUP_PROTECTION_SNAPSHOT_FAILED');
+      const candidate=qaCandidateWithProtection(draft.state),allPayloads=[...draft.legacyJournalPayloads,...draft.importProvenancePayloads];
+      await qaFullBackupStore.replaceFromBackup(draft.media,allPayloads);idbReplaced=true;
+      const commit=commitQaRestoreCandidate(candidate);if(!commit.ok)throw new Error(commit.message||'QA_BACKUP_CANONICAL_COMMIT_FAILED');
+      canonicalCommitted=true;state=candidate;lastVerifiedCanonicalRaw=commit.payload;window.lastPersistenceResult=commit.result;window.__canonicalSaveFailurePending=null;
+      applyTheme(state.settings?.theme);renderAll();qaFullBackupDraft=null;renderBackupRestore();alert('QA 数据恢复完成。正式版数据未修改。');
+    }catch(error){
+      let rollbackError=null;
+      if(idbReplaced&&!canonicalCommitted&&previousIdb){try{await qaFullBackupStore.replaceCaptured(previousIdb);}catch(rollback){rollbackError=rollback;}}
+      const message=rollbackError?'恢复失败，且 QA IndexedDB 回滚未完成。请使用刚创建的恢复前保护快照。正式版数据未修改。':qaRestoreError(error);
+      const preview=$('#qaFullBackupRestorePreview');if(preview)preview.innerHTML=`<p class="notice error">${esc(message)}</p>`;
+    }
+  };
   window.openSnapshotDetail=async function(id){const meta=ensureSafety().snapshots.find(row=>String(row.snapshotId)===String(id));if(!meta)return;const body=$('#backupRestoreBody');body.innerHTML=`<button class="ghost" type="button" onclick="renderBackupRestore()">‹ 返回快照历史</button><section class="backup-user-section"><h3>快照详情</h3><div class="detail-grid"><div><small>创建时间</small><b>${esc(formatWhen(meta.createdAt))}</b></div><div><small>类型</small><b>${esc(typeLabel(meta.reason))}</b></div><div><small>来源版本</small><b>v${esc(meta.appVersion||'—')}</b></div><div><small>schema</small><b>${esc(meta.schemaVersion??'—')}</b></div></div><p class="section-note">${esc(snapshotSummary(meta))} · 约 ${Math.round((meta.payloadBytes||0)/1024)} KB</p><button class="btn primary" type="button" onclick="restoreInternalSnapshot('${esc(meta.snapshotId)}')">从此快照恢复</button></section>`;};
   window.restoreInternalSnapshot=async function(id){
     const selected=ensureSafety().snapshots.find(row=>String(row.snapshotId)===String(id));if(!selected)return;

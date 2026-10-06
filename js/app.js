@@ -1,9 +1,9 @@
-window.JOURNAL_BUILD='v0.23.3-forwarding-warehouse-state-fix-iphone-qa1-20261006';
-document.documentElement.dataset.runtimeBuild='v0.23.3-forwarding-warehouse-state-fix-iphone-qa1-20261006';
+window.JOURNAL_BUILD='v0.23.3-qa-full-backup-restore-qa1-20261006';
+document.documentElement.dataset.runtimeBuild='v0.23.3-qa-full-backup-restore-qa1-20261006';
 const {createProductivityModule, createNoSpendModule, createCollectionsModule, createSubscriptionModule, createMediaStore, createSnapshotStore, createLegacyJournalPayloadStore, createInventoryModule, createRecurrenceHelper, createSellersModule, createOrdersModule, createTodayDashboard, createOneLineImport, createTimelineFilter, createFiveYearJournal, createHistoricalDualImporter, createLegacyJournalPayloadManager, analyzeLegacyJournalFootprint} = window.JournalModules || {};
 const KEY='journal-planner-qa-v091';
 const APP_VERSION='0.23.3';
-const BUILD_LABEL='Forwarding Warehouse State Fix iPhone QA1';
+const BUILD_LABEL='QA Full Backup Restore QA1';
 window.APP_VERSION=APP_VERSION;
 const LEGACY_KEYS=['journal-planner-qa-v090','journal-planner-qa-v081','journal-planner-qa-v052','journal-planner-qa-v070','journal-planner-qa-v051','journal-planner-qa-v03','journal-planner-qa-v031','journal-planner-qa-v04','journal-planner-qa-v05'];
 const INVENTORY_SORT_MODES=['added','updated','created','az','za','quantityAsc','quantityDesc','expiry'];
@@ -1228,7 +1228,7 @@ else boot();
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js?v=0233forwardingwarehousestatefixqa1-20261006').catch(err=>console.warn('SW registration failed',err));
+    navigator.serviceWorker.register('./sw.js?v=0233qafullbackuprestoreqa1-20261006').catch(err=>console.warn('SW registration failed',err));
   });
 }
 

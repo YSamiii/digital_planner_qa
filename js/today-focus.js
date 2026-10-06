@@ -47,18 +47,52 @@
     return { id: `${module}:${sourceId}`, module, sourceId: String(sourceId), type, priority, date, titleKey, subtitle, meta, action };
   }
 
+  function isVisibleOrder(order) {
+    return !!order?.id && !order.archived && order.archivedAt == null && order.deleted !== true && order.deletedAt == null && order.tombstoned !== true;
+  }
+
+  function pickupOrderSort(a, b) {
+    const aDate = String(a?.expectedDate || '9999-12-31');
+    const bDate = String(b?.expectedDate || '9999-12-31');
+    return aDate.localeCompare(bDate) || String(a?.id || '').localeCompare(String(b?.id || ''));
+  }
+
+  function collectPickupOrdersForTodayFocus(state, options = {}) {
+    const effective = options.getEffectiveOrderStatus || ((order) => defaultEffectiveStatus(order, state));
+    const sellers = state?.orders?.sellers || [];
+    const sellerName = order => String(order?.sellerNameSnapshot || sellers.find(row => String(row?.id) === String(order?.sellerId))?.name || '').trim();
+    const orders = (state?.orders?.items || []).filter(isVisibleOrder).filter(order => {
+      const status = String(effective(order) || '').toLowerCase();
+      return PICKUP.has(status) && !COMPLETED.has(status);
+    }).sort(pickupOrderSort);
+    const sellerNames = [];
+    for (const order of orders) {
+      const name = sellerName(order);
+      if (name && !sellerNames.includes(name)) sellerNames.push(name);
+    }
+    return { orders, orderIds: orders.map(order => String(order.id)), sellerNames };
+  }
+
+  function buildPickupFocusItem(state, options = {}) {
+    const pickup = collectPickupOrdersForTodayFocus(state, options);
+    if (!pickup.orders.length) return null;
+    return item({ module: 'orders', sourceId: 'pickup-orders', type: 'pickup_orders', priority: 1, titleKey: 'pickupOrders', action: { type: 'open_pickup_orders', orderIds: pickup.orderIds }, meta: { pickupCount: pickup.orders.length, sellerNames: pickup.sellerNames, orderIds: pickup.orderIds } });
+  }
+
   function collectOrderFocusItems(state, today, options = {}) {
     const effective = options.getEffectiveOrderStatus || ((order) => defaultEffectiveStatus(order, state));
     const sellers = state.orders?.sellers || [];
     const byOrder = new Map();
+    const pickup = buildPickupFocusItem(state, options);
+    const pickupOrderIds = new Set(pickup?.meta?.orderIds || []);
+    if (pickup) byOrder.set(pickup.id, pickup);
     for (const order of state.orders?.items || []) {
-      if (!order?.id || order.archived) continue;
+      if (!isVisibleOrder(order) || pickupOrderIds.has(String(order.id))) continue;
       const status = String(effective(order) || '').toLowerCase();
       if (COMPLETED.has(status)) continue;
       const seller = order.sellerNameSnapshot || sellers.find(row => String(row?.id) === String(order.sellerId))?.name || '';
       let next = null;
-      if (PICKUP.has(status)) next = item({ module: 'orders', sourceId: order.id, type: 'ready_pickup', priority: 1, titleKey: 'readyPickup', subtitle: seller, action: { type: 'open_order', id: String(order.id) } });
-      else if (order.expectedDate && order.expectedDate < today) next = item({ module: 'orders', sourceId: order.id, type: 'overdue_order', priority: 1, date: order.expectedDate, titleKey: 'overdueOrder', subtitle: seller, action: { type: 'open_order', id: String(order.id) } });
+      if (order.expectedDate && order.expectedDate < today) next = item({ module: 'orders', sourceId: order.id, type: 'overdue_order', priority: 1, date: order.expectedDate, titleKey: 'overdueOrder', subtitle: seller, action: { type: 'open_order', id: String(order.id) } });
       else if (order.expectedDate === today) next = item({ module: 'orders', sourceId: order.id, type: 'expected_today', priority: 2, date: order.expectedDate, titleKey: 'expectedToday', subtitle: seller, action: { type: 'open_order', id: String(order.id) } });
       else if (order.expectedDate > today && order.expectedDate <= addCalendarDays(today, 2)) next = item({ module: 'orders', sourceId: order.id, type: 'expected_soon', priority: 3, date: order.expectedDate, titleKey: 'expectedSoon', subtitle: seller, action: { type: 'open_order', id: String(order.id) } });
       if (next) byOrder.set(String(order.id), next);
@@ -130,6 +164,16 @@
   function subtitleText(row) {
     const i18n = window.TodayFocusI18n;
     const progress = row.meta?.progress;
+    if (row.type === 'pickup_orders') {
+      const count = Math.max(0, Number(row.meta?.pickupCount) || 0);
+      const names = Array.isArray(row.meta?.sellerNames) ? row.meta.sellerNames.slice(0, 2) : [];
+      if (count === 1 && names.length) return names[0];
+      const pieces = [i18n.t('pickupReadyCount', { count })];
+      if (names.length) pieces.push(...names);
+      const remaining = Math.max(0, count - names.length);
+      if (remaining) pieces.push(i18n.t('pickupMore', { count: remaining }));
+      return pieces.filter(Boolean).join(' · ');
+    }
     if (row.subtitle === 'notLoggedToday') return [progress ? i18n.t(progress.key, progress) : '', i18n.t('notLoggedToday')].filter(Boolean).join(' · ');
     if (progress) return i18n.t(progress.key, progress);
     if (row.type === 'subscription_soon') {
@@ -142,7 +186,7 @@
   function icon(type) {
     if (type.includes('subscription')) return '◷';
     if (type.includes('challenge')) return '✓';
-    if (type === 'ready_pickup') return '⌑';
+    if (type === 'ready_pickup' || type === 'pickup_orders') return '⌑';
     return '□';
   }
 
@@ -158,5 +202,5 @@
     return `<section class="today-focus" aria-labelledby="todayFocusHeading"><div class="section-head"><h2 id="todayFocusHeading">${esc(i18n.t('todayFocus'))}</h2>${items.length > 5 ? `<button type="button" class="ghost today-focus-view-all" onclick="openTodayFocusDetails()">${esc(i18n.t('viewAll'))}</button>` : ''}</div><div class="today-focus-list">${visible.length ? renderRows(visible) : `<p class="today-focus-empty">${esc(i18n.t('nothingNeedsAttention'))}</p>`}</div></section>`;
   }
 
-  window.TodayFocus = { buildTodayFocusItems, collectOrderFocusItems, collectSubscriptionFocusItems, collectChallengeFocusItems, addCalendarDays, daysBetween, render, renderRows, subtitleText };
+  window.TodayFocus = { buildTodayFocusItems, collectOrderFocusItems, collectPickupOrdersForTodayFocus, buildPickupFocusItem, collectSubscriptionFocusItems, collectChallengeFocusItems, addCalendarDays, daysBetween, render, renderRows, subtitleText };
 })();

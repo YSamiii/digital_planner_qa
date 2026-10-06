@@ -1,9 +1,9 @@
-window.JOURNAL_BUILD='v0.23.3-qa-full-backup-restore-qa1-20261006';
-document.documentElement.dataset.runtimeBuild='v0.23.3-qa-full-backup-restore-qa1-20261006';
+window.JOURNAL_BUILD='v0.23.4-today-focus-pickup-grouping-iphone-qa1-20261006';
+document.documentElement.dataset.runtimeBuild='v0.23.4-today-focus-pickup-grouping-iphone-qa1-20261006';
 const {createProductivityModule, createNoSpendModule, createCollectionsModule, createSubscriptionModule, createMediaStore, createSnapshotStore, createLegacyJournalPayloadStore, createInventoryModule, createRecurrenceHelper, createSellersModule, createOrdersModule, createTodayDashboard, createOneLineImport, createTimelineFilter, createFiveYearJournal, createHistoricalDualImporter, createLegacyJournalPayloadManager, analyzeLegacyJournalFootprint} = window.JournalModules || {};
 const KEY='journal-planner-qa-v091';
-const APP_VERSION='0.23.3';
-const BUILD_LABEL='QA Full Backup Restore QA1';
+const APP_VERSION='0.23.4';
+const BUILD_LABEL='Today Focus Pickup Grouping iPhone QA1';
 window.APP_VERSION=APP_VERSION;
 const LEGACY_KEYS=['journal-planner-qa-v090','journal-planner-qa-v081','journal-planner-qa-v052','journal-planner-qa-v070','journal-planner-qa-v051','journal-planner-qa-v03','journal-planner-qa-v031','journal-planner-qa-v04','journal-planner-qa-v05'];
 const INVENTORY_SORT_MODES=['added','updated','created','az','za','quantityAsc','quantityDesc','expiry'];

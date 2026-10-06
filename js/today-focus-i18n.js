@@ -3,7 +3,9 @@
 
   const messages = {
     todayFocus: { zh: '今日重点', en: 'Today Focus' },
-    readyPickup: { zh: '待取订单', en: 'Ready for Pickup' },
+    pickupOrders: { zh: '待取订单', en: 'Pickup Orders' },
+    pickupReadyCount: { zh: '{count} 个可以取货', en: '{count} orders ready for pickup' },
+    pickupMore: { zh: '+{count}', en: '+{count}' },
     overdueOrder: { zh: '订单已超过预计日期', en: 'Order Past Expected Date' },
     expectedToday: { zh: '今天预计到货', en: 'Expected Today' },
     expectedSoon: { zh: '即将到货', en: 'Expected Soon' },

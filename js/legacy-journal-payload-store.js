@@ -115,6 +115,9 @@
     Object.entries(group||{}).forEach(([key,value])=>{if(!value||typeof value!=='object')return;entries[key]={fingerprint:text(value.fingerprint),matchedExisting:value.matchedExisting===true,replacedCurrent:value.replacedCurrent===true};});
     return {format:2,payloadRef:ONE_LINE_PROVENANCE_PAYLOAD_ID,sourceApp:'one_line_a_day_v7',sourceVersion:7,entries};
   }
+  function oneLineProvenancePayloadFor(group){
+    return {id:ONE_LINE_PROVENANCE_PAYLOAD_ID,version:1,type:'one_line_a_day_provenance',data:clone(group||{})};
+  }
 
   function createLegacyJournalPayloadManager(store){
     if(!store)throw new Error('Legacy journal payload store unavailable');
@@ -138,7 +141,7 @@
         for(const record of batch)await putVerified(payloadFor(record));
         onProgress?.({completed:Math.min(offset+batch.length,candidates.length),total:candidates.length});
       }
-      return {records:source.map(compactRecord),payloadCount:candidates.length};
+      return {records:source.map(compactRecord),payloadCount:candidates.length,payloads:candidates.map(payloadFor)};
     }
     async function exportForBackup(records){
       const refs=[...new Set((records||[]).map(record=>text(record?.payloadRef)).filter(Boolean))];
@@ -148,7 +151,7 @@
     }
     async function stageOneLineProvenance(group){
       if(isCompactOneLineProvenance(group))return clone(group);
-      const payload={id:ONE_LINE_PROVENANCE_PAYLOAD_ID,version:1,type:'one_line_a_day_provenance',data:clone(group||{})};
+      const payload=oneLineProvenancePayloadFor(group);
       await store.put(payload);
       const readBack=await store.get(payload.id);
       if(JSON.stringify(readBack)!==JSON.stringify(payload))throw new Error('ONE_LINE_PROVENANCE_READBACK_FAILED');
@@ -171,11 +174,11 @@
       if(!payload)throw new Error(`LEGACY_PAYLOAD_MISSING:${record.payloadRef}`);
       return restoreRecord(record,payload);
     }
-    return {stageCompaction,stageOneLineProvenance,exportForBackup,exportOneLineProvenanceForBackup,restoreFromBackup,restoreOneLineProvenanceFromBackup,hydrateRecord,payloadFor,compactRecord,needsPayload};
+    return {stageCompaction,stageOneLineProvenance,exportForBackup,exportOneLineProvenanceForBackup,restoreFromBackup,restoreOneLineProvenanceFromBackup,hydrateRecord,payloadFor,compactRecord,needsPayload,oneLineProvenancePayloadFor};
   }
 
   window.JournalModules=window.JournalModules||{};
   window.JournalModules.createLegacyJournalPayloadManager=createLegacyJournalPayloadManager;
   window.JournalModules.analyzeLegacyJournalFootprint=analyzeLegacyJournalFootprint;
-  window.JournalModules.legacyJournalProvenance={isCompactOneLineProvenance,oneLineEntries,oneLineEntry,setOneLineEntry,oneLineEntryCount,compactOneLineProvenance};
+  window.JournalModules.legacyJournalProvenance={isCompactOneLineProvenance,oneLineEntries,oneLineEntry,setOneLineEntry,oneLineEntryCount,compactOneLineProvenance,oneLineProvenancePayloadFor};
 })();

@@ -14,6 +14,7 @@
   const health=window.PersistenceHealth;
   const qaFullBackupStore=window.JournalModules?.createQaFullBackupStore?.();
   const qaFullBackupParser=window.QAFullBackupRestore;
+  const qaLegacyPayloads=typeof legacyJournalPayloads!=='undefined'?legacyJournalPayloads:null;
   let qaFullBackupDraft=null;
 
   function ensureSafety(){
@@ -69,14 +70,15 @@
   function qaRestoreSummaryHtml(){
     if(!qaFullBackupDraft)return '<p class="small">选择正式版导出的完整备份文件后，先显示只读预检摘要，再由你确认恢复。</p>';
     const meta=qaFullBackupDraft.envelope,summary=qaFullBackupDraft.summary;
-    return `<div class="section-note"><b>备份预检完成</b><br>来源 v${esc(meta.appVersion||'—')} · schema ${esc(meta.schemaVersion)} · Backup v${esc(meta.backupVersion)}<br>日记 ${summary.entries} · Daily ${summary.dailyDates} 天 · Orders ${summary.orders} · Inventory ${summary.inventory}<br>历史记录 ${summary.legacyRecords} · legacy payload ${summary.legacyPayloads} · provenance payload ${summary.provenancePayloads} · media ${summary.media}<br>内部 snapshot payload：未包含在当前完整备份格式中，不会作为 QA 恢复内容。</div><div class="btns"><button class="btn secondary" type="button" onclick="clearQaFullBackupRestore()">取消</button><button class="btn primary" type="button" onclick="confirmQaFullBackupRestore()">确认恢复到 QA</button></div>`;
+    const migration=draft.requiresSlimmingMigration?'<br>将自动迁移为当前 QA 数据格式。':'';
+    return `<div class="section-note"><b>备份预检完成</b><br>来源 v${esc(meta.appVersion||'—')} · schema ${esc(meta.schemaVersion)} · Backup v${esc(meta.backupVersion)}<br>日记 ${summary.entries} · Daily ${summary.dailyDates} 天 · Orders ${summary.orders} · Inventory ${summary.inventory}<br>历史记录 ${summary.legacyRecords} · legacy payload ${summary.legacyPayloads} · provenance payload ${summary.provenancePayloads} · media ${summary.media}${migration}<br>内部 snapshot payload：未包含在当前完整备份格式中，不会作为 QA 恢复内容。</div><div class="btns"><button class="btn secondary" type="button" onclick="clearQaFullBackupRestore()">取消</button><button class="btn primary" type="button" onclick="confirmQaFullBackupRestore()">确认恢复到 QA</button></div>`;
   }
   function qaRestoreSectionHtml(){
     return `<section class="backup-user-section" data-qa-full-backup-restore><h3>导入完整备份到 QA</h3><p class="small">选择正式版导出的完整备份。恢复后会替换当前 QA 数据，但不会修改正式版。</p><input id="qaFullBackupFile" type="file" accept="application/json,.json" hidden onchange="prepareQaFullBackupRestore(event)"><button class="btn secondary" type="button" onclick="openQaFullBackupFilePicker()">选择完整备份文件</button><div id="qaFullBackupRestorePreview">${qaRestoreSummaryHtml()}</div></section>`;
   }
   function qaRestoreError(error){
     const code=String(error?.message||error||'QA_BACKUP_RESTORE_FAILED');
-    const labels={QA_BACKUP_INVALID_JSON:'备份文件不是有效 JSON。',QA_BACKUP_UNSUPPORTED_FORMAT:'不支持的完整备份格式。',QA_BACKUP_UNSUPPORTED_SCHEMA:'备份 schema 不兼容。',QA_BACKUP_LEGACY_REF_MISSING:'备份缺少历史日记 payload。',QA_BACKUP_PROVENANCE_REF_MISSING:'备份缺少 One Line provenance payload。',QA_BACKUP_MEDIA_REF_MISSING:'备份缺少被引用的媒体。',QA_BACKUP_IDB_READBACK_FAILED:'QA IndexedDB read-back 验证失败。'};
+    const labels={QA_BACKUP_INVALID_JSON:'备份文件不是有效 JSON。',QA_BACKUP_UNSUPPORTED_FORMAT:'此备份版本无法在当前 QA 中恢复。',QA_BACKUP_SCHEMA_TOO_NEW:'此备份来自较新的数据版本，当前 QA 无法安全恢复。',QA_BACKUP_UNSUPPORTED_SCHEMA:'备份 schema 不兼容。',QA_BACKUP_LEGACY_REF_MISSING:'备份数据不完整，缺少必要的历史内容引用。',QA_BACKUP_PROVENANCE_REF_MISSING:'备份数据不完整，缺少必要的历史内容引用。',QA_BACKUP_MEDIA_REF_MISSING:'备份数据不完整，缺少必要的历史内容引用。',QA_BACKUP_IDB_READBACK_FAILED:'QA IndexedDB read-back 验证失败。'};
     return labels[code]||'恢复失败，QA 数据未完成替换。正式版数据未修改。';
   }
   function qaCandidateWithProtection(candidate){
@@ -95,6 +97,24 @@
     }});
     if(!result?.ok)return {ok:false,stage:result?.stage||'commit',message:result?.message||'QA canonical commit failed'};
     return {ok:true,payload,result};
+  }
+  async function stageQaV1Slimming(draft){
+    if(!qaLegacyPayloads)throw new Error('QA_BACKUP_MIGRATION_UNAVAILABLE');
+    const staged=clone(draft.state),records=Array.isArray(staged.legacyJournalRecords)?staged.legacyJournalRecords:[];
+    const compacted=await qaLegacyPayloads.stageCompaction(records,{batchSize:25});
+    staged.legacyJournalRecords=compacted.records;
+    const generated=[...(compacted.payloads||[])];
+    const oneLine=staged.importProvenance?.one_line_a_day;
+    if(oneLine&&!(window.JournalModules?.legacyJournalProvenance?.isCompactOneLineProvenance?.(oneLine))){
+      const payload=qaLegacyPayloads.oneLineProvenancePayloadFor?.(oneLine);
+      if(!payload)throw new Error('QA_BACKUP_MIGRATION_UNAVAILABLE');
+      const compact=await qaLegacyPayloads.stageOneLineProvenance(oneLine);
+      staged.importProvenance={...(staged.importProvenance||{}),one_line_a_day:compact};
+      generated.push(payload);
+    }
+    qaFullBackupParser?.validateComponents?.({state:staged,media:draft.media,legacyJournalPayloads:generated.filter(payload=>payload.type!=='one_line_a_day_provenance'),importProvenancePayloads:generated.filter(payload=>payload.type==='one_line_a_day_provenance')});
+    await qaFullBackupStore.verifyBackupRows(draft.media,generated);
+    return {candidate:qaCandidateWithProtection(staged),payloads:generated};
   }
   async function readQaBackupFile(file){
     if(!file)throw new Error('QA_BACKUP_FILE_MISSING');
@@ -137,19 +157,30 @@
     if(!draft)return;
     if(!qaFullBackupStore){alert('恢复不可用：QA IndexedDB 恢复组件未加载。');return;}
     if(!confirm('确认将此完整备份恢复到 QA？\n\n当前 QA 数据会被替换。\n正式版数据不会被修改。'))return;
-    let previousIdb=null,idbReplaced=false,canonicalCommitted=false;
+    let previousIdb=null,idbMutationAttempted=false,canonicalCommitted=false;
     try{
       previousIdb=await qaFullBackupStore.capture();
       const protection=await createSnapshot('pre_restore_snapshot',{healthGate:currentHealthGate()});
       if(!protection?.snapshotId)throw new Error('QA_BACKUP_PROTECTION_SNAPSHOT_FAILED');
-      const candidate=qaCandidateWithProtection(draft.state),allPayloads=[...draft.legacyJournalPayloads,...draft.importProvenancePayloads];
-      await qaFullBackupStore.replaceFromBackup(draft.media,allPayloads);idbReplaced=true;
+      let candidate;
+      if(draft.requiresSlimmingMigration){
+        idbMutationAttempted=true;
+        await qaFullBackupStore.replaceFromBackup(draft.media,[]);
+        const staged=await stageQaV1Slimming(draft);
+        candidate=staged.candidate;
+      }else{
+        const allPayloads=[...draft.legacyJournalPayloads,...draft.importProvenancePayloads];
+        idbMutationAttempted=true;
+        await qaFullBackupStore.replaceFromBackup(draft.media,allPayloads);
+        qaFullBackupParser?.validateComponents?.({state:draft.state,media:draft.media,legacyJournalPayloads:draft.legacyJournalPayloads,importProvenancePayloads:draft.importProvenancePayloads});
+        candidate=qaCandidateWithProtection(draft.state);
+      }
       const commit=commitQaRestoreCandidate(candidate);if(!commit.ok)throw new Error(commit.message||'QA_BACKUP_CANONICAL_COMMIT_FAILED');
       canonicalCommitted=true;state=candidate;lastVerifiedCanonicalRaw=commit.payload;window.lastPersistenceResult=commit.result;window.__canonicalSaveFailurePending=null;
       applyTheme(state.settings?.theme);renderAll();qaFullBackupDraft=null;renderBackupRestore();alert('QA 数据恢复完成。正式版数据未修改。');
     }catch(error){
       let rollbackError=null;
-      if(idbReplaced&&!canonicalCommitted&&previousIdb){try{await qaFullBackupStore.replaceCaptured(previousIdb);}catch(rollback){rollbackError=rollback;}}
+      if(idbMutationAttempted&&!canonicalCommitted&&previousIdb){try{await qaFullBackupStore.replaceCaptured(previousIdb);}catch(rollback){rollbackError=rollback;}}
       const message=rollbackError?'恢复失败，且 QA IndexedDB 回滚未完成。请使用刚创建的恢复前保护快照。正式版数据未修改。':qaRestoreError(error);
       const preview=$('#qaFullBackupRestorePreview');if(preview)preview.innerHTML=`<p class="notice error">${esc(message)}</p>`;
     }

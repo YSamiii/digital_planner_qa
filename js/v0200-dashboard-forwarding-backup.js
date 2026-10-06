@@ -1,7 +1,7 @@
 /* v0.20.0: projections and safety preferences.  Canonical domain records stay unchanged. */
 (function(){
   'use strict';
-  const V20_BUILD='v0.23.4-today-focus-pickup-grouping-iphone-qa1-20261006';
+  const V20_BUILD='v0.23.4-qa-backup-v1-v2-restore-qa2-20261006';
   document.documentElement.dataset.runtimeBuild=V20_BUILD;
   window.JOURNAL_BUILD=V20_BUILD;
   const $=selector=>document.querySelector(selector);

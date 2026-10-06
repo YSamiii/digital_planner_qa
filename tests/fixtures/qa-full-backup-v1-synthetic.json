@@ -1,0 +1,20 @@
+{
+  "version": 12,
+  "schemaVersion": 12,
+  "appVersion": "0.23.0",
+  "backupVersion": 1,
+  "exportedAt": "2026-10-06T12:00:00.000Z",
+  "state": {
+    "schemaVersion": 12,
+    "entries": [{"id":"entry-v1","date":"2026-10-06","content":"Synthetic entry"}],
+    "dailyBlocks": {"2026-10-06":{"myDay":"Synthetic daily","xixiDay":""}},
+    "orders": {"items":[{"id":"order-forwarding-v1","seller":"Synthetic Seller","fulfillment":"forwarding","forwarding":{"batchId":null,"independentStatus":"at_warehouse"}}],"sellers":[],"pickupLocations":[],"recurring":[],"forwardingBatches":[]},
+    "inventory": {"items":[{"id":"inventory-v1","name":"Synthetic item","quantity":1}],"categories":[],"locations":[]},
+    "noSpendChallenges":[{"id":"no-spend-v1","name":"Synthetic","dailyRecords":{"2026-10-06":"no_spend"}}],
+    "twelveWeekYears":[{"id":"twelve-week-v1","weeks":[{"id":"week-v1","structuredActions":[{"id":"action-v1","name":"Walk","weeklyTarget":3,"checkins":{"2026-10-06":true}}]}]}],
+    "legacyJournalRecords":[{"id":"legacy-v1","date":"2025-01-01","title":"Legacy","content":"Legacy content","provenance":{"attributedContentRTFBase64":"c3ludGhldGlj","originalTags":["legacy"]},"legacyAttachmentMetadata":[{"id":"attachment-v1","filename":"missing.jpg","type":"image/jpeg","sortOrder":0,"provenance":"synthetic","missing_media":true}]}],
+    "importProvenance":{"one_line_a_day":{"2026-10-06":{"fingerprint":"synthetic-fingerprint","matchedExisting":false,"replacedCurrent":false,"source":"synthetic"}}},
+    "settings":{"theme":"sage"}
+  },
+  "media": [{"id":"media-v1","mime":"text/plain","createdAt":0,"ownerType":"synthetic","ownerId":"entry-v1","data":"cw=="}]
+}
